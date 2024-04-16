@@ -1,12 +1,23 @@
 ## Requirements - Part 1: Describing Data 
 
 As a user, I want to see a listing of all available pets. Each pet should have a card that has all this data:
-- id
-- image
-- name
-- color
-- specialSkill
-- typeOfPet
+- id  // integer
+- image // string
+- name // string
+- color // string
+- specialSkill // string
+- typeOfPet // string
+
+
+Table pet {
+  id number [pk]
+  image string
+  name string
+  color string
+  specialSkill string
+  typeOfPet string
+  favorite boolean
+}
 
 Navigate to [dbDiagram.io](https://dbDiagram.io) and create an entity for these properties.
 
