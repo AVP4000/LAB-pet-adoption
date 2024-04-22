@@ -241,18 +241,114 @@ const pets = [
     }
   ];
 
+  const createDomString = (pet) => {
+    return `<div class="card" style="width: 18rem;">
+    <h5 class="card-title">${pet.name}</h5>
+     <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
+     <div class="card-body">
+       <p class="card-text">${pet.color}</p>
+      <h5 class="skills">${pet.specialSkill}</h5>
+      <p class="petType">${pet.type}</p>
+        </div>
+      </div>`;
+  };
+  
+  let domString = "";
+  let filterValue = 0;
 
   const dom = document.querySelector("#app");
-  let domString = "";
-  for (const pet of pets) {
-    domString += `<div class="card" style="width: 18rem;">
-    <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
-    <div class="card-body">
-      <h5 class="card-title">${pet.name}</h5>
-      <p1 class="card-text">${pet.color}</p1>
-      <h1 class="skills">${pet.specialSkill}</h1>
-    </div>
-  </div>`;
-};
+  // let domString = "";
+
+  pets.forEach((pet) => {
+    domString += createDomString(pet);
+    app.innerHTML = domString;
+  });
+  
+  app.innerHTML = domString;
+  
+  // const catFilter = () => {
+  //   domString = "";
+  //   pets.forEach((pet) => {
+  //     if (pet.type === "cat") {
+  //       domString += createDomString(pet);
+  //     }
+  //     filterValue = 1;
+  //     app.innerHTML = domString;
+  //   });
+  // };
+
+  // const dogFilter = () => {
+  //   domString = "";
+  //   pets.forEach((pet) => {
+  //     if (pet.type === "dog") {
+  //       domString += createDomString(pet);
+  //     }
+  //     filterValue = 2;
+  //     app.innerHTML = domString;
+  //   });
+  // };
+  
+  // const dinoFilter = () => {
+  //   domString = "";
+  //   pets.forEach((pet) => {
+  //     if (pet.type === "dino") {
+  //       domString += createDomString(pet);
+  //     }
+  //     filterValue = 3;
+  //     app.innerHTML = domString;
+  //   });
+  // };
+  
+  // const noFilter = () => {
+  //   domString = "";
+  //   pets.forEach((pet) => {
+  //     domString += createDomString(pet);
+  //     filterValue = 0;
+  //     app.innerHTML = domString;
+  //   });
+  // };
+
+  //I dont know why this doesnt work
+  const petFilter = (petType) => {
+    console.log('heres pet type: ', petType)
+    domString = "";
+    pets.forEach((pet) => {
+      if (pet.type === petType) {
+        domString += createDomString(pet);
+      }
+      filterValue = 1;
+      app.innerHTML = domString;
+    });
+  };
+
+//   for (const pet of pets) {
+//   domString += `<div class="card" style="width: 18rem;">
+//   <h5 class="card-title">${pet.name}</h5>
+//    <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
+//    <div class="card-body">
+//      <p class="card-text">${pet.color}</p>
+//     <h5 class="skills">${pet.specialSkill}</h5>
+//     <p class="petType">${pet.type}</p>
+//       </div>
+//     </div>`;
+// };
 
 dom.innerHTML = domString;
+
+const catFilterb = document.querySelector("#petCat")
+const dogFilterb = document.querySelector("#petDog")
+const dinoFilterb = document.querySelector("#petDino")
+
+
+catFilterb.addEventListener("click", () => {
+  petFilter('cat')
+});
+dogFilterb.addEventListener("click", () => {
+  petFilter('dog')
+});
+dinoFilterb.addEventListener("click", () => {
+  petFilter('dino')
+});
+
+
+
