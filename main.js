@@ -249,6 +249,7 @@ const pets = [
        <p class="card-text">${pet.color}</p>
       <h5 class="skills">${pet.specialSkill}</h5>
       <p class="petType">${pet.type}</p>
+      <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
         </div>
       </div>`;
   };
@@ -256,7 +257,7 @@ const pets = [
   let domString = "";
   let filterValue = 0;
 
-  const dom = document.querySelector("#app");
+  const app = document.querySelector("#app");
   // let domString = "";
 
   pets.forEach((pet) => {
@@ -264,7 +265,7 @@ const pets = [
     app.innerHTML = domString;
   });
   
-  app.innerHTML = domString;
+  // app.innerHTML = domString;
   
   // const catFilter = () => {
   //   domString = "";
@@ -310,7 +311,7 @@ const pets = [
 
   //I dont know why this doesnt work
   const petFilter = (petType) => {
-    console.log('heres pet type: ', petType)
+   // console.log('heres pet type: ', petType)
     domString = "";
     pets.forEach((pet) => {
       if (pet.type === petType) {
@@ -320,6 +321,13 @@ const pets = [
       app.innerHTML = domString;
     });
   };
+
+    // domString = "";
+  // pets.forEach((pet) => {
+  //   domString += createDomString(pet);
+  // app.innerHTML = domString;
+  // });
+  
 
 //   for (const pet of pets) {
 //   domString += `<div class="card" style="width: 18rem;">
@@ -333,12 +341,13 @@ const pets = [
 //     </div>`;
 // };
 
-dom.innerHTML = domString;
+// dom.innerHTML = domString;
+
 
 const catFilterb = document.querySelector("#petCat")
 const dogFilterb = document.querySelector("#petDog")
 const dinoFilterb = document.querySelector("#petDino")
-
+const allFilterb = document.querySelector("#petAll")
 
 catFilterb.addEventListener("click", () => {
   petFilter('cat')
@@ -349,6 +358,29 @@ dogFilterb.addEventListener("click", () => {
 dinoFilterb.addEventListener("click", () => {
   petFilter('dino')
 });
+allFilterb.addEventListener("click", () => {
+petFilter(['cat', 'dog', 'dino'])
+});
 
 
+///defining my form and creating a new pet
+const form = document.querySelector("#form-submit");
+const createNewPet = (e) => {
+  e.preventDefault();
+  
+  const newPetObj = {
+    id: pets.length + 1,
+    name: document.querySelector("#name").value,
+    color: document.querySelector("#color").value,
+    specialSkill: document.querySelector("#specialSkill").value,
+    type: document.querySelector("#type").value,
+    imageUrl: document.querySelector("#image").value,
+  }
+  
+  pets.push(newPetObj);
+  createDomString(pets);
+  form.reset();
+  }
+  
+  form.addEventListener("submit", createNewPet);
 
