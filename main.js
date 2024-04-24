@@ -311,7 +311,7 @@ const pets = [
 
   //I dont know why this doesnt work
   const petFilter = (petType) => {
-   // console.log('heres pet type: ', petType)
+   console.log('heres pet type: ', petType)
     domString = "";
     pets.forEach((pet) => {
       if (pet.type === petType) {
@@ -343,7 +343,27 @@ const pets = [
 
 // dom.innerHTML = domString;
 
+const renderToDom = (divId, htmlToRender) => {
+  const selectedDiv = document.querySelector(divId);
+  selectedDiv.innerHTML = htmlToRender;
+};
 
+const cardsOnDom = (array) => {
+  let domString = "";
+  for (const pet of array) {
+    domString += `<div class="card" style="width: 18rem;">
+    <h5 class="card-title">${pet.name}</h5>
+     <img src=${pet.imageUrl} class="card-img-top" alt=${pet.name}>
+     <div class="card-body">
+       <p class="card-text">${pet.color}</p>
+      <h5 class="skills">${pet.specialSkill}</h5>
+      <p class="petType">${pet.type}</p>
+      <button class="btn btn-danger" id="delete--${pet.id}">Delete</button>
+        </div>
+      </div>`;
+  }
+  renderToDom("#app", domString);
+}
 const catFilterb = document.querySelector("#petCat")
 const dogFilterb = document.querySelector("#petDog")
 const dinoFilterb = document.querySelector("#petDino")
@@ -359,7 +379,7 @@ dinoFilterb.addEventListener("click", () => {
   petFilter('dino')
 });
 allFilterb.addEventListener("click", () => {
-petFilter(['cat', 'dog', 'dino'])
+cardsOnDom(pets)
 });
 
 
