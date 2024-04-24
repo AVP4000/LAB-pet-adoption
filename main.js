@@ -384,23 +384,23 @@ cardsOnDom(pets)
 
 
 ///defining my form and creating a new pet
-const form = document.querySelector("#form-submit");
+const form = document.querySelector('form');
 const createNewPet = (e) => {
   e.preventDefault();
   
   const newPetObj = {
     id: pets.length + 1,
-    name: document.querySelector("#name").value,
-    color: document.querySelector("#color").value,
-    specialSkill: document.querySelector("#specialSkill").value,
-    type: document.querySelector("#type").value,
-    imageUrl: document.querySelector("#image").value,
+    name: document.querySelector("#petName").value,
+    color: document.querySelector("#petColor").value,
+    specialSkill: document.querySelector("#petSpecialSkill").value,
+    type: document.querySelector("#petType").value,
+    imageUrl: document.querySelector("#petImage").value,
   }
   
   pets.push(newPetObj);
-  createDomString(pets);
+  cardsOnDom(pets);
   form.reset();
   }
   
-  form.addEventListener("submit", createNewPet);
+  form.addEventListener('submit', createNewPet);
 
