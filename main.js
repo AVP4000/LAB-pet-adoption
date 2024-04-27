@@ -309,7 +309,7 @@ const pets = [
   //   });
   // };
 
-  //I dont know why this doesnt work
+  //I dont know why this doesnt work(Works now)
   const petFilter = (petType) => {
    console.log('heres pet type: ', petType)
     domString = "";
@@ -343,6 +343,7 @@ const pets = [
 
 // dom.innerHTML = domString;
 
+// Need to renderToDom and cardsOnDom
 const renderToDom = (divId, htmlToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = htmlToRender;
@@ -364,6 +365,8 @@ const cardsOnDom = (array) => {
   }
   renderToDom("#app", domString);
 }
+
+// filters to target "PetFilter"
 const catFilterb = document.querySelector("#petCat")
 const dogFilterb = document.querySelector("#petDog")
 const dinoFilterb = document.querySelector("#petDino")
@@ -383,10 +386,14 @@ cardsOnDom(pets)
 });
 
 
-///defining my form and creating a new pet
+///defining my submit form and creating option to add a new pet
+// 1. select/target the form on the DOM
 const form = document.querySelector('form');
+
+// 2. create a function that grabs all the values from the form, pushes the new object to the array, then repaints the DOM with the new teammate
+
 const createNewPet = (e) => {
-  e.preventDefault();
+  e.preventDefault(); // EVERY TIME YOU CREATE A FORM
   
   const newPetObj = {
     id: pets.length + 1,
@@ -401,6 +408,49 @@ const createNewPet = (e) => {
   cardsOnDom(pets);
   form.reset();
   }
-  
+  // 3. Add an event listener for the form submit and pass it the function (callback)
   form.addEventListener('submit', createNewPet);
 
+// ****** DELETE ****** //
+// ******************** //
+
+// Here we will be using event bubbling
+// 1. Target the app div if it already hasnt been done: const app = document.querySelector("#app");
+// 2. Add an event listener to capture clicks
+
+app.addEventListener('click', (e) => {
+  // console.log(e.target.id);
+  
+// 3. check e.target.id includes "delete"
+  if (e.target.id.includes("delete")) {
+    // destructuring: https://github.com/orgs/nss-evening-web-development/discussions/11
+    const [, id] = e.target.id.split("--");
+
+// 4. add logic to remove from array
+    // .findIndex is an array method
+    const index = pets.findIndex(e => e.id === Number(id));
+
+    // .splice modifies the original array
+    pets.splice(index, 1);
+
+// 5. Repaint the DOM with the updated array
+    cardsOnDom(pets);
+  }
+});
+
+const startApp = () => {
+  cardsOnDom(pets);
+  // events(); // ALWAYS LAST
+}
+
+startApp();
+
+// ADDITIONAL TIL - Adding multiple event listenrs to one element
+// Example events 'Click' and 'ontouchstart'
+// ['click','ontouchstart'].forEach( evt => 
+//   element.addEventListener(evt, dosomething, false)
+// );
+// OR for a function
+// ['click','ontouchstart'].forEach( function(evt) {
+//   element.addEventListener(evt, dosomething, false);
+// });
