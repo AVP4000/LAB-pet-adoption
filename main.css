@@ -1,3 +1,4 @@
+
 #app {
     display: flex;
     flex-wrap: wrap;
@@ -8,7 +9,7 @@
  }
 
 body { 
-    background-color: lightcoral;
+    background-color: red;
 }
 
 #btns {
@@ -23,7 +24,6 @@ flex-wrap: wrap;
 flex-direction: column;
 align-items: center;
 text-decoration: rgb(0, 0, 0);
-
 }
 
 h5 {
@@ -31,15 +31,16 @@ h5 {
 margin-top: 20px;
 }
 
-#form {
+form {
     background-color: rgb(37, 83, 99);
   }
 
 .petType {
 position: absolute;
-    bottom: -15px;
+  bottom: -15px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
+
 
 .delete {
   background-color: red;
@@ -47,7 +48,9 @@ position: absolute;
   font-size: 12px;
   width: 40px;
   height: 10px;
-  position: absolute;
-  margin-bottom: 10px;
   align-items: center;
+  position: absolute;
+  margin-bottom: 2px;
+  padding: 1em 
+  
       }
